@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const typingTexts = [
   "Track Your Crypto Portfolio",
@@ -6,7 +7,7 @@ const typingTexts = [
   "Set Custom Price Alerts",
 ];
 
-export default function LandingPage() {
+export default function Home() {
   const [typedText, setTypedText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -31,6 +32,7 @@ export default function LandingPage() {
       return () => clearTimeout(timeout);
     }
   }, [charIndex, textIndex]);
+  const navigate = useNavigate();
 
   // Scroll fade-in triggers
   useEffect(() => {
@@ -68,10 +70,12 @@ export default function LandingPage() {
           CryptoTrackr
         </h1>
         <div className="space-x-6">
-          <button className="px-5 py-2 rounded border border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black transition duration-300 font-semibold shadow-sm">
+          <button className="px-5 py-2 rounded border border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black transition
+           duration-300 font-semibold shadow-sm" onClick={() => navigate("/login")}>
             Login
           </button>
-          <button className="px-7 py-2 rounded bg-emerald-500 hover:bg-emerald-600 transition duration-300 font-bold shadow-md text-black animate-pulse">
+          <button className="px-7 py-2 rounded bg-emerald-500 hover:bg-emerald-600 transition duration-300 font-bold shadow-md text-black animate-pulse"
+            onClick={() => navigate("/dashboard")}>
             Get Started
           </button>
         </div>
@@ -80,9 +84,8 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section
         id="hero"
-        className={`max-w-7xl mx-auto px-8 py-28 flex flex-col md:flex-row items-center gap-12 transition-opacity duration-1000 ease-out ${
-          fadeInHero ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+        className={`max-w-7xl mx-auto px-8 py-28 flex flex-col md:flex-row items-center gap-12 transition-opacity duration-1000 ease-out ${fadeInHero ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
       >
         <div className="max-w-xl space-y-8 select-none">
           <h2 className="text-5xl font-extrabold leading-tight tracking-wide text-gradient-emerald-gold min-h-[120px]">
@@ -93,7 +96,8 @@ export default function LandingPage() {
             Effortlessly monitor your crypto investments, watch live prices, and get instant alerts when your favorite coins hit your targets.
           </p>
           <div className="flex gap-6">
-            <button className="px-10 py-4 bg-gradient-to-r from-emerald-500 via-teal-400 to-gold-400 rounded-lg shadow-lg font-semibold text-black hover:scale-105 transition-transform duration-300">
+            <button className="px-10 py-4 bg-gradient-to-r from-emerald-500 via-teal-400 to-gold-400 rounded-lg shadow-lg font-semibold text-black hover:scale-105 transition-transform duration-300"
+            onClick={() => navigate("/dashboard")}>
               Get Started
             </button>
             <button className="px-10 py-4 border-2 border-emerald-400 rounded-lg text-emerald-400 font-semibold hover:bg-emerald-400 hover:text-black transition duration-300">
@@ -104,7 +108,7 @@ export default function LandingPage() {
 
         <div className="w-full max-w-lg rounded-3xl shadow-xl overflow-hidden border border-gray-700">
           <img
-            src="https://images.unsplash.com/photo-1612831663923-12a0bb9f8fa0?auto=format&fit=crop&w=800&q=80"
+            src="https://www.shutterstock.com/image-illustration/top-7-cryptocurrency-tokens-by-600nw-2152214777.jpg"
             alt="Crypto Dashboard"
             className="w-full h-auto object-cover"
           />
@@ -114,9 +118,8 @@ export default function LandingPage() {
       {/* Features Section */}
       <section
         id="features"
-        className={`max-w-7xl mx-auto px-8 py-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center transition-opacity duration-1000 ease-out ${
-          fadeInFeatures ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+        className={`max-w-7xl mx-auto px-8 py-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center transition-opacity duration-1000 ease-out ${fadeInFeatures ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
       >
         {[
           {
@@ -145,14 +148,14 @@ export default function LandingPage() {
       {/* Call to Action */}
       <section
         id="cta"
-        className={`bg-gradient-to-r from-emerald-700 via-teal-600 to-gold-500 py-20 text-center rounded-t-3xl mx-8 md:mx-40 mb-20 shadow-xl transition-opacity duration-1000 ease-out ${
-          fadeInCTA ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
+        className={`bg-gradient-to-r from-emerald-700 via-teal-600 to-gold-500 py-20 text-center rounded-t-3xl mx-8 md:mx-40 mb-20 shadow-xl transition-opacity duration-1000 ease-out ${fadeInCTA ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
       >
         <h2 className="text-5xl font-extrabold mb-8 text-black drop-shadow-md select-none">
           Ready to Take Control of Your Crypto?
         </h2>
-        <button className="px-14 py-5 bg-black rounded-full font-bold text-emerald-400 shadow-lg hover:text-gold-400 hover:scale-105 transition duration-300 animate-pulse">
+        <button className="px-14 py-5 bg-black rounded-full font-bold text-emerald-400 shadow-lg hover:text-gold-400 hover:scale-105 transition duration-300 animate-pulse"
+        onClick={() => navigate("/dashboard")}>
           Get Started Now
         </button>
       </section>

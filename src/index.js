@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Toaster } from 'react-hot-toast';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+     <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: `1px solid `,
+            color: "greena",
+            fontSize: "15px",
+            marginTop: "100px",
+            borderRadius: "10px",
+          },
+        }}
+        autoClose={1000}
+        limit={1}
+      />
   </React.StrictMode>
 );
 
