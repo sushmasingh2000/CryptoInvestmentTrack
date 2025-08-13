@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("sushmasingh@gmail.com");
+  const [password, setPassword] = useState("123");
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
@@ -70,6 +70,9 @@ export default function Login() {
               required
             />
           </div>
+          <p className="text-center text-sm text-gray-400 mb-4">
+            Demo credentials are pre-filled. Just click login.
+          </p>
           <button
             type="submit"
             className="w-full py-3 rounded bg-emerald-500 text-black font-bold hover:bg-emerald-600 transition"

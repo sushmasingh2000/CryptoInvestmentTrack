@@ -1,3 +1,4 @@
+// export const domain = "http://192.168.18.101:5000";
 export const domain = "https://all-database-file.vercel.app";
 export const frontend = "https://crypto-investment-track.vercel.app"
 
