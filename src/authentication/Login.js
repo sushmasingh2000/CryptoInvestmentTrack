@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("sushmasingh@gmail.com");
   const [password, setPassword] = useState("123");
   const [error, setError] = useState("");
@@ -13,9 +14,11 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (!email || !password) {
       setError("Both email and password are required");
+      setLoading(false);
       return;
     }
 
@@ -35,6 +38,9 @@ export default function Login() {
       console.error(err);
       setError(err.response?.data?.msg || "Something went wrong. Please try again.");
     }
+    finally {
+      setLoading(false); // End loading
+    }
   };
 
   return (
@@ -47,39 +53,46 @@ export default function Login() {
         {/* Error message */}
         {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label>Email</label>
-            <input
-              type="email"
-              placeholder="Enter your Email"
-              className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+        {loading ? (
+          <div className="text-center py-10 text-emerald-400 text-xl font-semibold">
+            Logging in...
           </div>
-          <div>
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter your Password"
-              className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <p className="text-center text-sm text-gray-400 mb-4">
-            Demo credentials are pre-filled. Just click login.
-          </p>
-          <button
-            type="submit"
-            className="w-full py-3 rounded bg-emerald-500 text-black font-bold hover:bg-emerald-600 transition"
-          >
-            Login
-          </button>
-        </form>
+        ) : (
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter your Password"
+                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <p className="text-center text-sm text-gray-400 mb-4">
+              Demo credentials are pre-filled. Just click login.
+            </p>
+            <button
+              type="submit"
+              className="w-full py-3 rounded bg-emerald-500 text-black font-bold hover:bg-emerald-600 transition"
+            >
+              Login
+            </button>
+          </form>
+        )}
+
         <p className="mt-6 text-center text-gray-400">
           Don't have an account?{" "}
           <Link to="/register" className="text-emerald-400 hover:underline">

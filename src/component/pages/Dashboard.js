@@ -95,7 +95,8 @@ export default function Dashboard() {
         };
 
         fetchPrices();
-        const interval = setInterval(fetchPrices, 300000); // 60 seconds instead of 30
+        const interval = setInterval(fetchPrices, 600000);
+        //  10 min
         return () => clearInterval(interval);
     }, [alerts]);
 
@@ -105,23 +106,31 @@ export default function Dashboard() {
             Notification.requestPermission();
         }
     }, []);
+    const chartCache = {};
 
     const fetchChartData = async (symbol) => {
         try {
+            if (chartCache[symbol]) {
+                setSelectedCoinChart({ symbol, prices: chartCache[symbol] });
+                return;
+            }
+
             const res = await axios.get(
                 `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`
             );
+
             const prices = res.data.prices.map((p) => p[1]);
+            chartCache[symbol] = prices;
             setSelectedCoinChart({ symbol, prices });
 
-            // Scroll to the chart smoothly
             setTimeout(() => {
                 chartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 100); // slight delay ensures the chart renders before scrolling
+            }, 100);
         } catch (err) {
             console.error("Chart fetch failed", err);
         }
     };
+
 
 
     if (loading) {
@@ -150,18 +159,18 @@ export default function Dashboard() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white px-6 py-10 md:px-20">
 
-           <div className="flex justify-between items-center ">
-  <h1 className="text-5xl font-extrabold text-emerald-400">Crypto Trackr</h1>
-  <button
-    onClick={() => {
-      localStorage.removeItem("id");
-      window.location.href = "/login";
-    }}
-    className="text-red-500 hover:text-red-600 font-semibold border border-red-500 px-4 py-2 rounded"
-  >
-    Logout
-  </button>
-</div>
+            <div className="flex justify-between items-center ">
+                <h1 className="text-5xl font-extrabold text-emerald-400">Crypto Trackr</h1>
+                <button
+                    onClick={() => {
+                        localStorage.removeItem("id");
+                        window.location.href = "/login";
+                    }}
+                    className="text-red-500 hover:text-red-600 font-semibold border border-red-500 px-4 py-2 rounded"
+                >
+                    Logout
+                </button>
+            </div>
 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-10">
