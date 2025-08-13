@@ -1,0 +1,116 @@
+🌐 Project Name: Crypto Trackr
+A live dashboard to track crypto portfolio, simulate investment, and manage wallet data.
+
+🧠 What is it?
+Ye ek React-based frontend dashboard hai jisme:
+
+Apka crypto portfolio dikhaya jaata hai
+
+Live prices CoinGecko API se fetch kiye jaate hain
+
+Aap alert laga sakte ho kisi coin ke target price pe
+
+Transaction history dikhata hai
+
+Wallet sync aur download option bhi hai
+
+DCA simulator bhi diya gaya hai (Dollar Cost Averaging)
+
+🧩 Dashboard Components Breakdown:
+✅ useState, useEffect, axios
+Used to handle data, API calls, and updates in the UI.
+
+🧾 Headings and Their Purpose:
+1. 🏷️ Live Prices
+Ye CoinGecko se har 5 minute me live prices fetch karta hai.
+
+Aapke portfolio coins ka current value update hota rehta hai.
+
+Use: Real-time tracking of your assets.
+
+2. 📊 Your Portfolio
+Ek table hai jo dikhaata hai:
+
+Coin name & logo
+
+Quantity (kitna coin hold karte ho)
+
+Current price (live)
+
+Total value (quantity × price)
+
+Profit/Loss (aaj ka)
+
+View Chart (last 7 days ka graph)
+
+✅ Ye table automatic calculate karta hai total value aur profit.
+
+3. 📈 7-Day Price Chart
+Jab aap "View Chart" button click karte ho, wo coin ka 7 din ka price chart dikhata hai.
+
+Use: Recent trend dekhne ke liye.
+
+4. 🧮 Summary Cards
+3 summary cards top pe:
+
+Total Portfolio Value
+
+Total Assets (kitne coins portfolio me hain)
+
+Today’s Profit/Loss
+
+✅ Gives you a quick overview in 1 second.
+
+5. 🧠 DCA Simulator
+DCA = Dollar Cost Averaging.
+
+Ye tool simulate karta hai agar aap regular interval pe (monthly) investment karte to aaj ka value kya hota.
+
+Inputs:
+
+Coin
+
+Investment per month
+
+Kitne months
+
+Output:
+
+Total coins
+
+Total invested
+
+Current value
+
+Profit / Loss
+
+✅ Help karta hai strategy test karne me.
+
+6. 📱 Wallet Sync
+External wallet ko connect karke crypto data fetch kar sakte ho.
+
+Note: Backend ya wallet API pe depend karta hai.
+
+7. 🚨 Set Alerts
+Aap manually kisi coin pe target price set kar sakte ho.
+
+Jab price us target tak pahunchta hai, browser notification aur toast alert show hota hai.
+
+✅ Useful for price tracking without checking again & again.
+
+8. 📜 Transaction History
+Dummy ya actual past transactions dikhata hai.
+
+Portfolio based history create karta hai.
+
+Use: Transparency and monitoring.
+
+9. 📥 Download
+Portfolio ka Excel ya JSON data download karne ka feature (via Download.js).
+
+Useful for offline tracking ya presentation.
+
+🔒 Logout Button
+User authentication ke liye localStorage me user ID save hoti hai.
+
+Logout button localStorage.clear() karta hai and user ko login page pe redirect karta hai.

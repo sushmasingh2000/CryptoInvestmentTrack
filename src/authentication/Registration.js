@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { endpoint } from "../utils/APIRoutes";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Registration() {
     const navigate = useNavigate();
@@ -7,73 +10,109 @@ export default function Registration() {
     const [name_d, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
-        if (email && password) {
-            navigate("/dashboard");
+        setError("");
+        if (!email || !name_d || !mobile || !password) {
+            setError("All fields are required");
+            return;
+        }
+        const reqbody = {
+            username: name_d,
+            email,
+            mobile_no: mobile,
+            set_password: password
+        }
+        try {
+            const res = await axios.post(endpoint?.registration,
+                reqbody
+            );
+              toast(res?.data?.msg)
+            if (res.data?.msg==="Registered successfully") {
+                navigate("/dashboard");
+            } else {
+                setError(res?.data.msg || "Registration failed");
+            }
+        } catch (err) {
+            console.error(err);
+            setError("Something went wrong. Please try again.");
         }
     };
-    
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-gray-800 text-white">
             <div className="bg-gray-900 p-10 rounded-xl shadow-xl w-full max-w-md border border-emerald-400">
                 <h2 className="text-3xl font-bold text-emerald-400 mb-6 text-center">
                     Create Your Account
                 </h2>
-                <form className="gap-4 place-content-center place-items-center grid grid-cols-2">
-                    <div>
-                        <label>Email</label>
-                        <input 
-                            type="email"
-                            placeholder="Enter your Email"
-                            className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+
+                {/* Error Message */}
+                {error && (
+                    <div className="text-red-400 mb-4 text-center">
+                        {error}
                     </div>
-                    <div>
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            placeholder="Enter your Name"
-                            className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                            value={name_d}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
+                )}
+
+                <form onSubmit={handleRegister} >
+                    <div className="gap-4 place-content-center place-items-center grid grid-cols-2">
+                        <div>
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                placeholder="Enter your Email"
+                                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter your Name"
+                                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                                value={name_d}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Mobile No.</label>
+                            <input
+                                type="number"
+                                placeholder="Enter your Mobile No."
+                                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                                value={mobile}
+                                onChange={(e) => setMobile(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                placeholder="Enter Your Password"
+                                className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <label>Mobile No.</label>
-                        <input
-                            type="number"
-                            placeholder="Enter your Mobile No."
-                            className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                            value={mobile}
-                            onChange={(e) => setMobile(e.target.value)}
-                            required
-                        />
+
+                    <div className="col-span-2">
+                        <button
+                            type="submit"
+                            className="w-full py-3 rounded mt-5 bg-emerald-500 text-black font-bold hover:bg-emerald-600 transition"
+                        >
+                            Register
+                        </button>
                     </div>
-                    <div>
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            placeholder="Enter Your Password"
-                            className="w-full mt-1 p-3 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                   
                 </form>
-                 <button
-                        type="submit"
-                        className="w-full py-3 rounded mt-5 bg-emerald-500 text-black font-bold hover:bg-emerald-600 transition"
-                    onSubmit={handleRegister} >
-                        Register
-                    </button>
+
                 <p className="mt-6 text-center text-gray-400">
                     Already have an account?{" "}
                     <Link to="/login" className="text-emerald-400 hover:underline">

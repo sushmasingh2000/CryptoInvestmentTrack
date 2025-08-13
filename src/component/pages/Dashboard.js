@@ -158,7 +158,7 @@ export default function Dashboard() {
                         <button
                             key={tab}
                             onClick={() => {
-                                const userId = localStorage.getItem("userid");
+                                const userId = localStorage.getItem("id");
                                 if (!userId) {
                                     window.location.href = "/login"; // redirect to login page
                                     return;
@@ -175,7 +175,15 @@ export default function Dashboard() {
                                     : tab}
                         </button>
                     ))}
-
+                    <button
+                        onClick={() => {
+                            localStorage.removeItem("id");  
+                            window.location.href = "/login";  
+                        }}
+                        className="ml-4 text-red-500 hover:text-red-600 font-semibold"
+                    >
+                        Logout
+                    </button>
 
                 </div>
             </div>

@@ -1,17 +1,39 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { endpoint } from "../utils/APIRoutes"; // ensure this file has login URL
+import toast from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Basic login simulation
-    if (email && password) {
-      // You can later replace this with real API call
-      navigate("/dashboard");
+    setError("");
+
+    if (!email || !password) {
+      setError("Both email and password are required");
+      return;
+    }
+
+    try {
+      const res = await axios.post(endpoint.login, {
+        email,
+        password,
+      });
+      if (res.status === 200) {
+        toast(res?.data.msg);
+        localStorage.setItem("id", res?.data?.user?.id)
+        navigate("/dashboard");
+      } else {
+        setError(res?.data.msg || "Invalid credentials");
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.msg || "Something went wrong. Please try again.");
     }
   };
 
@@ -21,6 +43,10 @@ export default function Login() {
         <h2 className="text-3xl font-bold text-emerald-400 mb-6 text-center">
           Welcome Back
         </h2>
+
+        {/* Error message */}
+        {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label>Email</label>

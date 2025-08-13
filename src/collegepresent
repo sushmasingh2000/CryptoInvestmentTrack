@@ -1,0 +1,27 @@
+📢 How to Present This in Project/College Demo
+Start Like:
+"Good morning/afternoon, my name is [Your Name], and I have created a Crypto Portfolio Dashboard using React. This project helps users track their crypto investments, monitor live prices, and simulate investment strategies like DCA."
+
+Present Feature-Wise:
+Live Prices: Real-time crypto price tracking using CoinGecko API.
+
+Portfolio Summary: Automatically calculates total value and profit/loss.
+
+Charts: Visualize past 7-day performance of each coin.
+
+DCA Simulator: Helps users test monthly investment outcomes.
+
+Wallet Integration: Sync wallets (mock/dummy for now).
+
+Alerts: Set price alerts for any crypto.
+
+History & Downloads: View transaction history and export data.
+
+✅ Suggestions While Presenting:
+Show live demo.
+
+Interact with the UI (click buttons).
+
+Highlight how it helps users make smart investment decisions.
+
+Explain how you used React, Axios, Tailwind, Chart.js, and CoinGecko API.
