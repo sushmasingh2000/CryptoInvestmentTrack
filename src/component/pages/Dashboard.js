@@ -108,13 +108,10 @@ export default function Dashboard() {
     }, []);
     const chartCache = {};
 
-    const fetchChartData = async (symbol) => {
-        try {
-            if (chartCache[symbol]) {
-                setSelectedCoinChart({ symbol, prices: chartCache[symbol] });
-                return;
-            }
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+    const fetchChartData = async (symbol, retries = 3) => {
+        try {
             const res = await axios.get(
                 `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=7`
             );
@@ -127,9 +124,16 @@ export default function Dashboard() {
                 chartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
             }, 100);
         } catch (err) {
-            console.error("Chart fetch failed", err);
+            if (err.response?.status === 429 && retries > 0) {
+                toast("Rate limited. Retrying after 10s...", {id:1});
+                await sleep(2000);
+                fetchChartData(symbol, retries - 1);
+            } else {
+                console.error("Chart fetch failed", err);
+            }
         }
     };
+
 
 
 
