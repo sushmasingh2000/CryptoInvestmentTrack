@@ -1,21 +1,27 @@
-🚀 Excited to share my latest project: **Crypto Trackr** — a real-time Crypto Portfolio Dashboard built with React!
 
-🎯 Features:
-- Live crypto prices with CoinGecko API integration 📈
-- Portfolio value and profit/loss tracking 💰
-- 7-day interactive price charts 📊
-- Dollar Cost Averaging (DCA) Simulator for smarter investing 💡
-- Price Alerts and Notifications 🚨
-- Wallet Sync and Transaction History 📜
-- Download portfolio data for offline use 📥
+🚀 Excited to share my new Learning project: Crypto Trackr — Real-Time Crypto Portfolio Dashboard
 
-Built with React, Tailwind CSS, Chart.js, and Axios for API requests.
+I'm excited to share Crypto Trackr, a web app built with React that helps users track and manage their cryptocurrency investments in real time.
 
-This project helped me deepen my understanding of React hooks, API integration, and user-friendly UI design.
+🔍 Key Features:
 
-Check out the live demo here 👉 [your live project link]  
-Source code 👉 [your GitHub repo link]
+Live crypto prices via CoinGecko API 📈
 
-Feel free to connect if you want to talk crypto or React development! 🚀
+Portfolio value and profit/loss tracking 💰
 
-#ReactJS #Crypto #WebDevelopment #Portfolio #DCA #JavaScript #CoinGecko #TailwindCSS
+Interactive 7-day price charts 📊
+
+Dollar Cost Averaging (DCA) Simulator 💡
+
+Custom price alerts and notifications 🚨
+
+Wallet sync and transaction history 📜
+
+Export portfolio data for offline use 📥
+
+This project reflects my passion for building clean, responsive, and data-driven user experiences that solve real-world problems — especially in fast-evolving spaces like crypto.
+
+Check out the live demo here 👉 [your live project link] 
+💬 Open to feedback, collaborations, or just a good chat about crypto and React!
+
+#ReactJS #Crypto #WebDevelopment #Portfolio #DCA #JavaScript #CoinGecko #TailwindCSS #SideProject #FrontendDevelopmen

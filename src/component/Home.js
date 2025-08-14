@@ -79,10 +79,10 @@ export default function Home() {
           </button>
           <button className="px-7 py-2 rounded bg-emerald-500 hover:bg-emerald-600 transition duration-300 font-bold shadow-md text-black animate-pulse"
             onClick={() => {
-              user ? navigate("/dashboard") : 
-              toast("Please Login")
-                navigate("/login");
-              
+              user ? navigate("/dashboard") :
+                toast("Please Login")
+              navigate("/login");
+
             }}>
             Get Started
           </button>
@@ -105,7 +105,7 @@ export default function Home() {
           </p>
           <div className="flex gap-6">
             <button className="px-10 py-4 bg-gradient-to-r from-emerald-500 via-teal-400 to-gold-400 rounded-lg shadow-lg font-semibold text-black hover:scale-105 transition-transform duration-300"
-              onClick={() => {user ? navigate("/dashboard") : toast("Please Login"); navigate("/login")}}>
+              onClick={() => { user ? navigate("/dashboard") : toast("Please Login"); navigate("/login") }}>
               Get Started
             </button>
             <button className="px-10 py-4 border-2 border-emerald-400 rounded-lg text-emerald-400 font-semibold hover:bg-emerald-400 hover:text-black transition duration-300">
@@ -160,10 +160,10 @@ export default function Home() {
           }`}
       >
         <h2 className="text-5xl font-extrabold mb-8 text-black drop-shadow-md select-none">
-          Ready to Take Control of Your Crypto?
+          Ready to Take Control of Your Crypto
         </h2>
         <button className="px-14 py-5 bg-black rounded-full font-bold text-emerald-400 shadow-lg hover:text-gold-400 hover:scale-105 transition duration-300 animate-pulse"
-          onClick={() => navigate("/dashboard")}>
+          onClick={() => { user ? navigate("/dashboard") : toast("Please Login"); navigate("/login") }}>
           Get Started Now
         </button>
       </section>
