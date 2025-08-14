@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const typingTexts = [
@@ -14,6 +15,8 @@ export default function Home() {
   const [fadeInHero, setFadeInHero] = useState(false);
   const [fadeInFeatures, setFadeInFeatures] = useState(false);
   const [fadeInCTA, setFadeInCTA] = useState(false);
+
+  const user = localStorage.getItem("id")
 
   // Typing effect hook
   useEffect(() => {
@@ -66,7 +69,7 @@ export default function Home() {
 
       {/* Navbar */}
       <nav className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center z-20 relative">
-        <h1 className="text-4xl font-extrabold text-emerald-400 tracking-wide select-none">
+        <h1 className="text-4xl lg:block  hidden font-extrabold text-emerald-400 tracking-wide select-none">
           CryptoTrackr
         </h1>
         <div className="space-x-6">
@@ -75,7 +78,12 @@ export default function Home() {
             Login
           </button>
           <button className="px-7 py-2 rounded bg-emerald-500 hover:bg-emerald-600 transition duration-300 font-bold shadow-md text-black animate-pulse"
-            onClick={() => navigate("/dashboard")}>
+            onClick={() => {
+              user ? navigate("/dashboard") : 
+              toast("Please Login")
+                navigate("/login");
+              
+            }}>
             Get Started
           </button>
         </div>
@@ -97,7 +105,7 @@ export default function Home() {
           </p>
           <div className="flex gap-6">
             <button className="px-10 py-4 bg-gradient-to-r from-emerald-500 via-teal-400 to-gold-400 rounded-lg shadow-lg font-semibold text-black hover:scale-105 transition-transform duration-300"
-            onClick={() => navigate("/dashboard")}>
+              onClick={() => {user ? navigate("/dashboard") : toast("Please Login"); navigate("/login")}}>
               Get Started
             </button>
             <button className="px-10 py-4 border-2 border-emerald-400 rounded-lg text-emerald-400 font-semibold hover:bg-emerald-400 hover:text-black transition duration-300">
@@ -155,7 +163,7 @@ export default function Home() {
           Ready to Take Control of Your Crypto?
         </h2>
         <button className="px-14 py-5 bg-black rounded-full font-bold text-emerald-400 shadow-lg hover:text-gold-400 hover:scale-105 transition duration-300 animate-pulse"
-        onClick={() => navigate("/dashboard")}>
+          onClick={() => navigate("/dashboard")}>
           Get Started Now
         </button>
       </section>
